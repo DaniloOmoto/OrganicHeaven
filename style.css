@@ -2,13 +2,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
 /*===== VARIABLES CSS =====*/
 :root{
-  --header-height: 3rem;
+  --header-height: 3.5rem;
 /*===== Colores =====*/
---hue-color:55;
+--hue-color:127;
 
-  --first-color: hsl(var(--hue-color), 100%, 50%);
+  --first-color: hsl(var(--hue-color), 61%, 46%);
   --first-color-second:hsl(var(--hue-color), 100%, 50%);
-  --first-color-alt:hsl(var(--hue-color), 88%, 42%);
+  --first-color-alt:hsl(var(--hue-color), 50%, 39%);
   --first-color-light:hsl(var(--hue-color), 100%, 60%);
   --second-color: #000000;
   --title-color:#000;
@@ -109,13 +109,7 @@ img{
 
 /*===== CLASS CSS ===== */
 
-.section{
-   padding:4rem 0 2rem;
-    
-}
-.s-section{
-    padding:3rem 0 2rem;
-}
+
 .section-title{
   font-size: var(--h1-font-size);
   color: var(--title-color);
@@ -141,6 +135,10 @@ img{
     margin-left: auto;
     margin-right: auto;
 }
+.h-container{
+    margin-left: auto;
+    margin-right: auto;
+}
 
 
 .bd-grid{
@@ -157,7 +155,7 @@ img{
     top: 0;
     left: 0;
     z-index: var(--z-fixed);
-    background-color: rgba(0, 0, 0,.15);
+    background-color: whitesmoke;
     box-shadow:0  5px rgba(0, 0, 0,.3);
    
   
@@ -173,9 +171,7 @@ img{
 }
 
    
-    .section{
-        padding: 8rem 0 2rem;
-    }
+ 
    
     .section-subtitle{
         margin-bottom: 4rem;
@@ -198,3 +194,58 @@ img{
     }
     .nav__menu{
         margin-left: auto;}
+
+        .nav__link{
+          color: rgb(0, 0, 0);
+          transition:.3s;
+          font-weight: var(--font-medium);
+      }
+        .nav__link:hover{
+          color: var(--first-color-alt);
+        
+      }
+      .nav__logo{
+        display: flex;
+        width: 7rem;
+        padding-left: 2rem;
+    
+    }
+
+
+    /*============= HOME=============*/
+    .home{
+  
+      overflow: hidden;
+      background:linear-gradient(rgba(4, 9, 30, 0.1),rgba(4, 9, 30, 0.1)), url(img/bg-img.jpg) no-repeat 50% 50%;
+      background-size: cover;
+      width: 100vw;
+
+      
+  }
+
+  .home__container{
+    position: relative;
+    height: 100vh;
+
+    align-content: space-around;
+    row-gap: 2rem;
+
+}
+
+.home__content{
+  border-left: 4px solid rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+  padding-left: 1rem;
+  z-index: var(--z-tooltip);
+  position: absolute;
+  top: 65%;
+  left: 5%;
+  
+}
+
+.text__box{
+  font-size: var(--big-font-size);
+  line-height: 3rem;
+  
+
+}
