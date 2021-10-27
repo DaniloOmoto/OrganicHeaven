@@ -223,7 +223,7 @@ img{
       
   }
 
-  .home__container{
+  .home__container, .sobre__container, .contato__container{
     position: relative;
     height: 100vh;
 
@@ -243,16 +243,19 @@ img{
   
 }
 
-.text__box{
-  font-size: var(--big-font-size);
+.home__text__box{
+  font-size: var(--font-medium);
   line-height: 3rem;
-  
+}
 
+.text__box{
+  font-size: var(--normal-font-size);
+  line-height: 2rem;
 }
 
 
 
-.sobre{
+.sobre, .contato{
   
   overflow: hidden;
   background:linear-gradient(rgba(4, 9, 30, 0.1),rgba(4, 9, 30, 0.1)), url(img/about-bg-img.jpg) no-repeat 50% 50%;
@@ -262,17 +265,28 @@ img{
   
 }
 
-.sobre-content{
+.sobre__content{
   position: absolute;
-  top: 15%;
-  left: 15%;
+  top: 30%;
+  left: 4%;
   padding-left: 1rem;
+  color: rgb(255, 255, 255);
   background: rgba(54, 22, 22, 0.5);
   z-index: var(--z-tooltip);
 
 }
 
-.about-box{
-  font-size: var(--normal-font-size);
-  line-height: 1.5rem;
+.contato__content{
+  position: absolute;
+  top: 30%;
+  left: 4%;
+  padding-left: 1rem;
+  color: rgb(255, 255, 255);
+  background: rgba(54, 22, 22, 0.5);
+  z-index: var(--z-tooltip);
+}
+
+.text__box a {
+  font-weight: bold;
+  color: #4aba3a;
 }
