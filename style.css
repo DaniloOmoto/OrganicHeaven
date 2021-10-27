@@ -244,12 +244,12 @@ img{
 }
 
 .home__text__box{
-  font-size: var(--font-medium);
+  font-size: var(--big-font-size);
   line-height: 3rem;
 }
 
 .text__box{
-  font-size: var(--normal-font-size);
+  font-size: var(--font-medium);
   line-height: 2rem;
 }
 
