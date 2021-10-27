@@ -249,3 +249,30 @@ img{
   
 
 }
+
+
+
+.sobre{
+  
+  overflow: hidden;
+  background:linear-gradient(rgba(4, 9, 30, 0.1),rgba(4, 9, 30, 0.1)), url(img/about-bg-img.jpg) no-repeat 50% 50%;
+  background-size: cover;
+  width: 100vw;
+
+  
+}
+
+.sobre-content{
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  padding-left: 1rem;
+  background: rgba(54, 22, 22, 0.5);
+  z-index: var(--z-tooltip);
+
+}
+
+.about-box{
+  font-size: var(--normal-font-size);
+  line-height: 1.5rem;
+}
