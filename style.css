@@ -261,8 +261,6 @@ img{
   background:linear-gradient(rgba(4, 9, 30, 0.1),rgba(4, 9, 30, 0.1)), url(img/about-bg-img.jpg) no-repeat 50% 50%;
   background-size: cover;
   width: 100vw;
-
-  
 }
 
 .sobre__content{
@@ -286,7 +284,96 @@ img{
   z-index: var(--z-tooltip);
 }
 
+.administracao {
+  margin-top: 100px;
+}
+
 .text__box a {
   font-weight: bold;
   color: #4aba3a;
+}
+
+/* Estilo para o HTML Tab da página de administração */
+/* referência: https://www.w3schools.com/howto/howto_js_tabs.asp */
+
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+#categoryList > div {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+#productList > div {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 5px;
+}
+
+.productImage{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.categoryContainer {
+  margin: 20px
+}
+
+.productContainer {
+  margin: 20px
+}
+
+.categoryContainer > h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.productContainer > h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* font-awesome icons */
+.lixo {
+  float: right;
+}
+
+.lixo:hover {
+  cursor: pointer;
+  
 }

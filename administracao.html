@@ -6,22 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" type="image/png" href="img/logo.png">
+    
     <title>Administração</title>
+
+    <script src="./functions/makeCategoriesList.js"></script>
+    <script src="./functions/makeProductsList.js"></script>
+    <script src="./functions/getData.js"></script>
+    <script src="./functions/countCategoryItems.js"></script>
+    <script src="./functions/postCategory.js"></script>
+    <script src="./functions/removeCategory.js"></script>
+    <script src="./functions/makeSelect.js"></script>
+    <script src="./functions/postProduct.js"></script>
+    <script src="./functions/removeProduct.js"></script>
+    <script src="./functions/updateProduct.js"></script>
+    <script src="./functions/searchProductById.js"></script>
+    <script src="./functions/changeCategoryName.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body onload="document.getElementById('categoryActive').click()">
     <!--===========HEADER=================-->
     <header class="l-header" id="header">
         <nav class="nav container">
             <a href="./home.html"class="nav__logo"><img src="img/logo.png" alt=""></a>
             <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list ">
-                  <li class="nav__item"><a href="home.html"class="nav__link">Home</a> </li> 
-                  <li class="nav__item"><a href="produtos.html" class="nav__link">Produtos</a> </li>
-                  <li class="nav__item"><a href="sobre.html" class="nav__link">Sobre</a> </li>
-                  <li class="nav__item"><a href="contato.html" class="nav__link">Contato</a> </li>
-                  <li class="nav__item"><a href="pedidos.html" class="nav__link">Pedidos</a></li>
-                  <li class="nav__item"><a href="administracao.html" class="nav__link">Administração</a> </li>
-            </ul>    
+              <ul class="nav__list ">
+                <li class="nav__item"><a href="home.html"class="nav__link">Home</a> </li> 
+                <li class="nav__item"><a href="produtos.html" class="nav__link">Produtos</a> </li>
+                <li class="nav__item"><a href="sobre.html" class="nav__link">Sobre</a> </li>
+                <li class="nav__item"><a href="contato.html" class="nav__link">Contato</a> </li>
+                <li class="nav__item"><a href="pedidos.html" class="nav__link">Pedidos</a></li>
+                <li class="nav__item"><a href="administracao.html" class="nav__link">Administração</a> </li>
+              </ul>    
           </div>
             </div>
         </nav>
@@ -29,7 +45,128 @@
     <!--===================MAIN=================-->
     <main class='main-ad'>
         <section class="administracao" id="home">
+
+            <script>
+            
+            // referência: https://www.w3schools.com/howto/howto_js_tabs.asp
+            function openTab(evt, action) {
+              var i, tabcontent, tablinks;
+              tabcontent = document.getElementsByClassName("tabcontent");
+              for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+              }
+              tablinks = document.getElementsByClassName("tablinks");
+              for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+              }
+              document.getElementById(action).style.display = "block";
+              evt.currentTarget.className += " active";
+            }
+
+            function filterProduct() {
+                var input, filter, container, item, i;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                container = document.getElementById("productList");
+                console.log(container)
+                item = container.getElementsByTagName("div");
+                console.log(item)
+                for (i = 0; i < item.length; i++) {
+                  chilrenId = item[i].getElementsByTagName("p")[0]
+                  chilrenCategory = item[i].getElementsByTagName("p")[2]
+                  chilrenName = item[i].getElementsByTagName("p")[3]
+                  if (chilrenId || chilrenCategory || chilrenName) {
+                    chilrenIdValue = chilrenId.textContent || chilrenId.innerText;
+                    chilrenCategoryValue = chilrenCategory.textContent || chilrenCategory.innerText;
+                    chilrenNameValue = chilrenName.textContent || chilrenName.innerText;
+                    if (chilrenIdValue.toUpperCase().indexOf(filter, 2) > -1 || chilrenCategoryValue.toUpperCase().indexOf(filter, 9) > -1 || chilrenNameValue.toUpperCase().indexOf(filter,4) > -1) {
+                      item[i].style.display = ""
+                    } else {
+                      item[i].style.display = "none"
+                    }
+                  }
+              }
+            }
+
+            makeCategoriesList(getData('viaVccxFfa','categoria'));
+            makeProductsList(getData('viaVccxFfa','produto'));
+
+            makeSelect('option1');
+            makeSelect('option2');
+
+            // TODO
+            // 1 - Conversão de floats: na hora do request, converter o formato BR para US 
+            // ou seja, tirar os pontos e trocar as vírgulas por pontos
+            // 2 - Limitar o número de casas decimais para 2 no 'preço' e 'peso' 
+            // 3 - A 
+            </script>
+
             <div class="administracao__container container">
+              <div class="container">
+  
+                <div class="tab">
+                  <button class="tablinks" id="categoryActive" onclick="openTab(event, 'Categoria')">Inserir/alterar nome de categorias</button>
+                  <button class="tablinks" id="productActive" onclick="openTab(event, 'Produto')">Inserir/atualizar produtos</button>
+                </div>
+                
+                <div id="Categoria" class="tabcontent">
+                  <label for="categoryname">Nome da categoria:</label><br>
+                  <input type="text" id="categoryname" name="nome" placeholder="Texto..."><br>
+                  <input type="submit" value='Inserir categoria' onclick="postCategory('viaVccxFfa')"/><br>
+                  <hr>
+                  <label>Categoria cujo nome será alterado:</label><br>
+                  <select name="categorias" id="option1" onchange="console.log(document.getElementById('option1').options[document.getElementById('option1').selectedIndex].value)"></select><br>
+                  <input type="hidden" name="categorias"/>
+                  <label for='newName'>Novo nome:</label><br>
+                  <input type='text' id='newName'></input><br>
+                  <input type="submit" value='Alterar nome' onclick="changeCategoryName('viaVccxFfa')"/>
+                </div>
+                
+                <div id="Produto" class="tabcontent">
+                  <label>ID - Categorias</label><br>
+                  <select name="categorias" id="option2" onchange="console.log(document.getElementById('option2').options[document.getElementById('option2').selectedIndex].value)"></select><br>
+                  <input type="hidden" name="categorias"/>
+                  <label for="codigo">Código:</label><br>
+                  <input type="number" min="0" step="1" id="codigo" name="codigo" placeholder="Números inteiros..."><br>
+                  <label for="nome">Nome:</label><br>
+                  <input type="text" id="nome" name="nome" placeholder="Texto..."><br>
+                  <label for="descricao">Descrição:</label><br>
+                  <input type="text" id="descricao" name="descricao" placeholder="Texto..."><br>
+                  <label for="preco">Preço (R$):</label><br>
+                  <input type="number" min="0" step="0.01" value="0.00" id='preco' name='preco' placeholder="R$..."><br>
+                  <label for="imagem">Imagem:</label><br> 
+                  <input type="text" id="imagem" name="imagem" placeholder="URL..."><br>
+                  <label for="peso">Peso (Kg):</label><br>
+                  <input type="number" min="0" step="0.01" value="0.00" id="peso" name="peso" placeholder="Kg..."><br>
+                  <input type="submit" value="Inserir produto" onclick="postProduct('viaVccxFfa')">
+                  <hr>
+                  <label for="categoryid">ID do produto a ser atualizado:</label><br>
+                  <input type="number" id="productid" name="id" placeholder="ID..." onchange="searchProductById('viaVccxFfa',document.getElementById('productid').value)"><br>
+                  <label for="codigo">Código:</label><br>
+                  <input type="number" min="0" step="1" id="codigoUpdate" name="codigo" placeholder="Números inteiros..."><br>
+                  <label for="nome">Nome:</label><br>
+                  <input type="text" id="nomeUpdate" name="nome" placeholder="Texto..."><br>
+                  <label for="descricao">Descrição:</label><br>
+                  <input type="text" id="descricaoUpdate" name="descricao" placeholder="Texto..."><br>
+                  <label for="preco">Preço (R$):</label><br>
+                  <input type="number" min="0" step="0.01" value="0.00" id='precoUpdate' name='preco' placeholder="R$..."><br>
+                  <label for="imagem">Imagem:</label><br> 
+                  <input type="text" id="imagemUpdate" name="imagem" placeholder="URL..."><br>
+                  <label for="peso">Peso (Kg):</label><br>
+                  <input type="number" min="0" step="0.01" value="0.00" id="pesoUpdate" name="peso" placeholder="Kg..."><br>
+                  <input type="submit" value="Atualizar produto" onclick="updateProduct('viaVccxFfa')"><br>
+                </div>
+
+              <div class='categoryContainer'>
+                <h3>Lista de Categorias (ID - nome - unidades)</h3>
+                <div id='categoryList'></div>
+              </div>
+
+              <div class='productContainer'>
+                <h3>Lista de Produtos</h3>
+                <span>Filtrar por ID/Categoria/Nome do produto:</span> <input type="text" id="myInput" onkeyup="filterProduct()" placeholder="ID/Categoria/Nome...">
+                <div id='productList'></div>
+              </div>
 
             </div>
         </section>
