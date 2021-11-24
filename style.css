@@ -355,7 +355,8 @@ img{
 }
 
 .productContainer {
-  margin: 20px
+  margin: 20px;
+
 }
 
 .categoryContainer > h3 {
@@ -376,4 +377,31 @@ img{
 .lixo:hover {
   cursor: pointer;
   
+}
+
+#productListSimp {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  column-gap: 3rem;
+  row-gap: 2rem;
+
+  
+}
+
+#productListSimp > div {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 5px;
+}
+
+
+.produtos__container{
+  margin-top: 8rem;
+}
+
+
+.img-cart{
+  width: 60px;
+ 
 }

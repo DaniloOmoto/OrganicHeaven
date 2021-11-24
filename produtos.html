@@ -6,35 +6,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" type="image/png" href="img/logo.png">
+     <script src="./functions/makeCategoriesList.js"></script>
+
+    <script src="./functions/makeProductsList.js"></script>
+    <script src="./functions/getData.js"></script>
+        <script src="./functions/simplifyProduct.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
     <title>Produtos</title>
 </head>
 <body>
     <!--===========HEADER=================-->
     <header class="l-header" id="header">
-        <nav class="nav container">
-            <a href="./home.html"class="nav__logo"><img src="img/logo.png" alt=""></a>
-            <div class="nav__menu" id="nav-menu">
+      <nav class="nav container">
+          <a href="./home.html" class="nav__logo"><img src="img/logo.png" alt=""></a>
+          <a href=""> <img src="img/pngegg.png"class="img-cart" alt="" ondrop="drop(event)" ondragover="allowDrop(event)"> </a>
+         <a href="" class="nav__link"  id="qtd">0</a>
+          <div class="nav__menu" id="nav-menu">
               <ul class="nav__list ">
-                <li class="nav__item"><a href="home.html"class="nav__link">Home</a> </li> 
+                <li class="nav__item"><a href="home.html" class="nav__link">Home</a> </li>
                 <li class="nav__item"><a href="produtos.html" class="nav__link">Produtos</a> </li>
                 <li class="nav__item"><a href="sobre.html" class="nav__link">Sobre</a> </li>
                 <li class="nav__item"><a href="contato.html" class="nav__link">Contato</a> </li>
                 <li class="nav__item"><a href="pedidos.html" class="nav__link">Pedidos</a></li>
-                <li class="nav__item"><a href="administracao.html" class="nav__link">Administração</a> </li>
-              </ul>    
+                <li class="nav__item">  </li> </li>
+              </ul>
           </div>
-            </div>
-        </nav>
-    </header>
+          </div>
+      </nav>
+  </header>
     <!--===================MAIN=================-->
     <main class='main-pr'>
         <section class="produtos" id="produtos">
             <div class="produtos__container container">
 
+     <script>
+  
+  let qtdPrdouto = [];      
+     function filterProduct() {
+                var input, filter, container, item, i;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                container = document.getElementById("productListSimp");
+                console.log(container)
+                item = container.getElementsByTagName("div");
+                console.log(item)
+                for (i = 0; i < item.length; i++) {
+                
+                  chilrenName = item[i].getElementsByTagName("p")[0]
+                  if (chilrenName) {
+                   
+                   
+                    chilrenNameValue = chilrenName.textContent || chilrenName.innerText;
+                    if (chilrenNameValue.toUpperCase().indexOf(filter,4) > -1) {
+                      item[i].style.display = ""
+                    } else {
+                      item[i].style.display = "none"
+                    }
+                  }
+              }
+            }
+
+
+        
+            simplifyProduct(getData('viaVccxFfa','produto'));
+
+    function allowDrop(ev){
+    ev.preventDefault();
+}
+
+function drag(ev){
+ 
+  
+    ev.dataTransfer.setData("text",ev.target.id)
+    
+}
+
+function drop(ev){
+    ev.preventDefault();
+    qtdPrdouto.push(ev.dataTransfer.getData("text"))
+  console.log(qtdPrdouto)
+  document.getElementById("qtd").innerText=qtdPrdouto.length;
+
+}
+            
+         
+
+            // TODO
+            // 1 - Conversão de floats: na hora do request, converter o formato BR para US 
+            // ou seja, tirar os pontos e trocar as vírgulas por pontos
+            // 2 - Limitar o número de casas decimais para 2 no 'preço' e 'peso' 
+            // 3 - A 
+
+
+
+            
+            </script>
+
+                <div class='productContainer2'>
+                  <h3>Lista de Produtos</h3>
+                  <span>Pesquisar produto:</span> <input type="text" id="myInput" onkeyup="filterProduct()" placeholder="Nome">
+                  <div id='productListSimp' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                </div>
+
+
+               
+
+         
+
             </div>
         </section>
-
+       
     </main>
-    
+
 </body>
+
 </html>
