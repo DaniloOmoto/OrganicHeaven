@@ -267,7 +267,7 @@ img{
   position: absolute;
   top: 30%;
   left: 4%;
-  padding-left: 1rem;
+  padding: .5rem 1rem;
   color: rgb(255, 255, 255);
   background: rgba(54, 22, 22, 0.5);
   z-index: var(--z-tooltip);
@@ -278,7 +278,7 @@ img{
   position: absolute;
   top: 30%;
   left: 4%;
-  padding-left: 1rem;
+  padding: .5rem 1rem;
   color: rgb(255, 255, 255);
   background: rgba(54, 22, 22, 0.5);
   z-index: var(--z-tooltip);
