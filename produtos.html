@@ -6,12 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" type="image/png" href="img/logo.png">
-     <script src="./functions/makeCategoriesList.js"></script>
-
+    <script src="./functions/makeCategoriesList.js"></script>
     <script src="./functions/makeProductsList.js"></script>
     <script src="./functions/getData.js"></script>
-        <script src="./functions/simplifyProduct.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="./functions/simplifyProduct.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
     <title>Produtos</title>
@@ -21,7 +20,7 @@
     <header class="l-header" id="header">
       <nav class="nav container">
           <a href="./home.html" class="nav__logo"><img src="img/logo.png" alt=""></a>
-          <a href=""> <img src="img/pngegg.png"class="img-cart" alt="" ondrop="drop(event)" ondragover="allowDrop(event)"> </a>
+          <a href="./pedidos.html"> <img src="img/pngegg.png"class="img-cart" alt="" ondrop="drop(event)" ondragover="allowDrop(event)"> </a>
          <a href="" class="nav__link"  id="qtd">0</a>
           <div class="nav__menu" id="nav-menu">
               <ul class="nav__list ">
@@ -41,83 +40,106 @@
         <section class="produtos" id="produtos">
             <div class="produtos__container container">
 
-     <script>
+  <script>
   
-  let qtdPrdouto = [];      
-     function filterProduct() {
-                var input, filter, container, item, i;
-                input = document.getElementById("myInput");
-                filter = input.value.toUpperCase();
-                container = document.getElementById("productListSimp");
-                console.log(container)
-                item = container.getElementsByTagName("div");
-                console.log(item)
-                for (i = 0; i < item.length; i++) {
-                
-                  chilrenName = item[i].getElementsByTagName("p")[0]
-                  if (chilrenName) {
-                   
-                   
-                    chilrenNameValue = chilrenName.textContent || chilrenName.innerText;
-                    if (chilrenNameValue.toUpperCase().indexOf(filter,4) > -1) {
-                      item[i].style.display = ""
-                    } else {
-                      item[i].style.display = "none"
-                    }
-                  }
-              }
-            }
+  let qtdProd = [];
+  const reducer = (previousValue, currentValue) => previousValue+currentValue.quantidade;
 
+  if (localStorage.getItem('carrinho')) {
+    console.log('existe um localstorage chamado carrinho')
+    qtdProd = JSON.parse(localStorage.getItem('carrinho'))
+    document.getElementById("qtd").innerText=qtdProd.reduce(reducer,0);
+  } else {
+    console.log('não existe um locastorage chamado carrinho')
+  }
 
-        
-            simplifyProduct(getData('viaVccxFfa','produto'));
+  console.log(qtdProd)
+
+  function filterProduct() {
+      var input, filter, container, item, i;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      container = document.getElementById("productListSimp");
+      console.log(container)
+      item = container.getElementsByTagName("div");
+      console.log(item)
+      for (i = 0; i < item.length; i++) {
+      
+        chilrenName = item[i].getElementsByTagName("p")[0]
+        if (chilrenName) {
+          chilrenNameValue = chilrenName.textContent || chilrenName.innerText;
+          if (chilrenNameValue.toUpperCase().indexOf(filter,0) > -1) {
+            item[i].style.display = ""
+          } else {
+            item[i].style.display = "none"
+          }
+        }
+    }
+  }
+
+    simplifyProduct(getData('viaVccxFfa','produto'));
 
     function allowDrop(ev){
     ev.preventDefault();
-}
+  }
 
-function drag(ev){
- 
-  
-    ev.dataTransfer.setData("text",ev.target.id)
-    
-}
+  function Product() {
+    return {
+      'id':   '',
+      'nome':    '',
+      'preco':     '',
+      'img':    '',
+      'quantidade': 1
+    };
+};
 
-function drop(ev){
+  function drag(ev){
+    /* console.log(ev.target.id)
+    console.log(ev.target.dataset.nome)
+    console.log(ev.target.dataset.preco) */
+    ev.dataTransfer.setData("id",ev.target.id)
+    ev.dataTransfer.setData("img",ev.target.src)
+    ev.dataTransfer.setData("nome",ev.target.dataset.nome)
+    ev.dataTransfer.setData("preco",ev.target.dataset.preco)
+  }
+
+  function drop(ev){
     ev.preventDefault();
-    qtdPrdouto.push(ev.dataTransfer.getData("text"))
-  console.log(qtdPrdouto)
-  document.getElementById("qtd").innerText=qtdPrdouto.length;
+    console.log(ev.dataTransfer.getData("id"))
+    console.log(ev.dataTransfer.getData("nome"))
+    console.log(ev.dataTransfer.getData("preco"))
+    console.log(ev.dataTransfer.getData("img"))
+    var obj = Product()
+    obj.id = ev.dataTransfer.getData("id")
+    obj.nome = ev.dataTransfer.getData("nome")
+    obj.preco = ev.dataTransfer.getData("preco")
+    obj.img = ev.dataTransfer.getData("img")
 
-}
-            
-         
+    //Se o produto já existir no array
+    qtdProd.forEach( item => (item.id == obj.id) ? (item.quantidade++,localStorage.setItem('carrinho',JSON.stringify(qtdProd))) : null)
 
-            // TODO
-            // 1 - Conversão de floats: na hora do request, converter o formato BR para US 
-            // ou seja, tirar os pontos e trocar as vírgulas por pontos
-            // 2 - Limitar o número de casas decimais para 2 no 'preço' e 'peso' 
-            // 3 - A 
+    //Se o array 'qtdProd' estiver vazio ou se o produto não existir nesse array
+    if (!qtdProd.length || qtdProd.every((item) => item.id != obj.id)) {
+    console.log('Não existe produto igual no carrinho')
+    qtdProd.push(obj)
+    console.log(qtdProd)
+    localStorage.setItem('carrinho',JSON.stringify(qtdProd))
+    }
 
+    document.getElementById("qtd").innerText=qtdProd.reduce(reducer,0);
 
-
-            
+  }
             </script>
 
-                <div class='productContainer2'>
+                <div class='productContainer'>
                   <h3>Lista de Produtos</h3>
                   <span>Pesquisar produto:</span> <input type="text" id="myInput" onkeyup="filterProduct()" placeholder="Nome">
-                  <div id='productListSimp' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                  <div id='productListSimp'></div>
                 </div>
-
-
-               
-
-         
 
             </div>
         </section>
-       
+
     </main>
 
 </body>

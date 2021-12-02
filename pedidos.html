@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" type="image/png" href="img/logo.png">
     <title>Pedidos</title>
+    <script src='./functions/deleteProductFromLocal.js'></script>
+    <script src='./functions/addProductToLocal.js'></script>
+    <script src='./functions/substractProductFromLocal.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <!--===========HEADER=================-->
@@ -27,24 +31,29 @@
         </nav>
     </header>
     <!--===================MAIN=================-->
-
-    <script> 
-    const foo = document.querySelectorAll(".teste");
-    console.log(foo);
-     </script>
     <main class='main-pdd'>
-        <section class="pedidos" id="pedidos">
+        <section class="pedidos">
             <div class="pedidos__container container">
-             <div class="teste"> 1</div>
-              <div class="teste"> 2</div>
-               <div class="teste">3 </div>
-                <div class="teste">4 </div>
-            
-
+              <h3>Valor total no boleto: R$<span id="totalPrice"><span/></h3>
+              <div id="pedidos"></div>
             </div>
         </section>
 
     </main>
+
+    <script src="./functions/makeCartProductList.js"></script>
+
+    <script>
+      const reducer = (previousValue, currentValue) => previousValue+parseFloat(currentValue.preco)*currentValue.quantidade;
+      
+      if (localStorage.getItem('carrinho')) {
+        qtdProd = JSON.parse(localStorage.getItem('carrinho'))
+        console.log(qtdProd)
+        document.getElementById("totalPrice").innerText=qtdProd.reduce(reducer,0);
+      } else {
+        document.getElementById("totalPrice").innerText = 0
+      }
+    </script>
     
 </body>
 </html>
