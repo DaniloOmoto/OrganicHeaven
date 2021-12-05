@@ -226,7 +226,6 @@ img{
   .home__container, .sobre__container, .contato__container{
     position: relative;
     height: 100vh;
-
     align-content: space-around;
     row-gap: 2rem;
 
@@ -374,7 +373,7 @@ img{
   float: right;
 }
 
-.lixo:hover {
+.fa:hover {
   cursor: pointer;
   
 }
@@ -395,10 +394,18 @@ img{
   padding: 5px;
 }
 
+#pedidos > div {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 5px;
+}
 
-.produtos__container{
+
+.produtos__container, .pedidos__container{
   margin-top: 8rem;
 }
+
 
 
 .img-cart{

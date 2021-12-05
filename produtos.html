@@ -6,12 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" type="image/png" href="img/logo.png">
-     <script src="./functions/makeCategoriesList.js"></script>
-
+    <script src="./functions/makeCategoriesList.js"></script>
     <script src="./functions/makeProductsList.js"></script>
     <script src="./functions/getData.js"></script>
-        <script src="./functions/simplifyProduct.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="./functions/simplifyProduct.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
     <title>Produtos</title>
@@ -21,7 +20,7 @@
     <header class="l-header" id="header">
       <nav class="nav container">
           <a href="./home.html" class="nav__logo"><img src="img/logo.png" alt=""></a>
-          <a href=""> <img src="img/pngegg.png"class="img-cart" alt="" ondrop="drop(event)" ondragover="allowDrop(event)"> </a>
+          <a href="./pedidos.html"> <img src="img/pngegg.png"class="img-cart" alt="" ondrop="drop(event)" ondragover="allowDrop(event)"> </a>
          <a href="" class="nav__link"  id="qtd">0</a>
           <div class="nav__menu" id="nav-menu">
               <ul class="nav__list ">
@@ -104,20 +103,15 @@
             
             </script>
 
-                <div class='productContainer2'>
+                <div class='productContainer'>
                   <h3>Lista de Produtos</h3>
                   <span>Pesquisar produto:</span> <input type="text" id="myInput" onkeyup="filterProduct()" placeholder="Nome">
                   <div id='productListSimp' ondrop="drop(event)"></div>
                 </div>
 
-
-               
-
-         
-
             </div>
         </section>
-       
+
     </main>
 
 </body>

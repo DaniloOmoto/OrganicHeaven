@@ -9,9 +9,9 @@ const simplifyProduct = async (prom) => {
 
   
       produto.innerHTML = `
-      <p><strong>Nome:</strong> ${item.nome}</p>
+      <p style='text-align: center; margin-bottom: 10px'><strong>${item.nome}</strong></p>
       <p><strong>Preço:</strong> R$${item.preco}</p>
-      <img class='productImage' src=${item.imagem} width=150" height="70" dragable=true ondragstart="drag(event)" id=${item.id}>
+      <img class='productImage' src=${item.imagem} data-nome=${item.nome} data-preco=${item.preco} width=150" height="70" dragable=true ondragstart="drag(event)" id=${item.id}>
       `;
       document.getElementById('productListSimp').appendChild(produto);
     });
