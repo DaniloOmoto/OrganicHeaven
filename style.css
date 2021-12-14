@@ -394,7 +394,7 @@ img{
   padding: 5px;
 }
 
-#pedidos > div {
+#carrinho > div {
   border: 1px solid black;
   border-radius: 10px;
   margin-top: 10px;
@@ -402,7 +402,7 @@ img{
 }
 
 
-.produtos__container, .pedidos__container{
+.produtos__container, .pedidos__container,.carrinho__container{
   margin-top: 8rem;
 }
 

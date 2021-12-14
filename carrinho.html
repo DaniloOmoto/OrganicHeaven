@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" type="image/png" href="img/logo.png">
+    <title>Pedidos</title>
+    <script src='./functions/deleteProductFromLocal.js'></script>
+    <script src='./functions/addProductToLocal.js'></script>
+    <script src='./functions/substractProductFromLocal.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <!--===========HEADER=================-->
+    <header class="l-header" id="header">
+        <nav class="nav container">
+            <a href="./home.html"class="nav__logo"><img src="img/logo.png" alt=""></a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list ">
+                  <li class="nav__item"><a href="home.html"class="nav__link">Home</a> </li> 
+                  <li class="nav__item"><a href="produtos.html" class="nav__link">Produtos</a> </li>
+                  <li class="nav__item"><a href="sobre.html" class="nav__link">Sobre</a> </li>
+                  <li class="nav__item"><a href="contato.html" class="nav__link">Contato</a> </li>
+                  <li class="nav__item"><a href="pedidos.html" class="nav__link">Pedidos</a></li>
+                  <li class="nav__item"><a href="administracao.html" class="nav__link">Administração</a> </li>
+            </ul>    
+          </div>
+            </div>
+        </nav>
+    </header>
+    <!--===================MAIN=================-->
+    <main class='main-carrinho'>
+        <section class="carrinho">
+            <div class="carrinho__container container">
+              <h3>Valor total no boleto: R$<span id="totalPrice"><span/></h3>
+              <div id="carrinho"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="./functions/makeCartProductList.js"></script>
+
+    <script>
+      const reducer = (previousValue, currentValue) => previousValue+parseFloat(currentValue.preco)*currentValue.quantidade;
+      
+      if (localStorage.getItem('carrinho')) {
+        qtdProd = JSON.parse(localStorage.getItem('carrinho'))
+        console.log(qtdProd)
+        document.getElementById("totalPrice").innerText=qtdProd.reduce(reducer,0);
+      } else {
+        document.getElementById("totalPrice").innerText = 0
+      }
+    </script>
+    
+</body>
+</html>

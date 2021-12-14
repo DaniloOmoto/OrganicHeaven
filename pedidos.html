@@ -34,26 +34,13 @@
     <main class='main-pdd'>
         <section class="pedidos">
             <div class="pedidos__container container">
-              <h3>Valor total no boleto: R$<span id="totalPrice"><span/></h3>
+       
               <div id="pedidos"></div>
             </div>
         </section>
 
     </main>
 
-    <script src="./functions/makeCartProductList.js"></script>
-
-    <script>
-      const reducer = (previousValue, currentValue) => previousValue+parseFloat(currentValue.preco)*currentValue.quantidade;
-      
-      if (localStorage.getItem('carrinho')) {
-        qtdProd = JSON.parse(localStorage.getItem('carrinho'))
-        console.log(qtdProd)
-        document.getElementById("totalPrice").innerText=qtdProd.reduce(reducer,0);
-      } else {
-        document.getElementById("totalPrice").innerText = 0
-      }
-    </script>
     
 </body>
 </html>

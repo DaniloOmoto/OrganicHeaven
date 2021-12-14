@@ -16,6 +16,6 @@ if (localStorage.getItem('carrinho')) {
     <p><strong>Preço total:</strong> R$${item.preco*item.quantidade}</p>
     <img class='productImage' src=${item.img} width=150" height="70">
     `;
-    document.getElementById('pedidos').appendChild(produto);
+    document.getElementById('carrinho').appendChild(produto);
   });
 }
