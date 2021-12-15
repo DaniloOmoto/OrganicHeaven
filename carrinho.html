@@ -34,7 +34,7 @@
     <main class='main-carrinho'>
         <section class="carrinho">
             <div class="carrinho__container container">
-              <h3>Valor total no boleto: R$<span id="totalPrice"><span/></h3>
+              <h3>Valor total no boleto: R$<span id="totalPrice"></span></h3>
               <div id="carrinho"></div>
             </div>
         </section>
@@ -44,12 +44,14 @@
     <script src="./functions/makeCartProductList.js"></script>
 
     <script>
-      const reducer = (previousValue, currentValue) => previousValue+parseFloat(currentValue.preco)*currentValue.quantidade;
+      const reducer = (previousValue, currentValue) => previousValue+(currentValue.preco*currentValue.quantidade).toFixed(2);
       
       if (localStorage.getItem('carrinho')) {
         qtdProd = JSON.parse(localStorage.getItem('carrinho'))
         console.log(qtdProd)
-        document.getElementById("totalPrice").innerText=qtdProd.reduce(reducer,0);
+        document.getElementById("totalPrice").innerText=qtdProd.reduce(reducer,"");
+        document.getElementById("totalPrice").innerText=document.getElementById("totalPrice").innerText.replace('.', ',');
+        
       } else {
         document.getElementById("totalPrice").innerText = 0
       }

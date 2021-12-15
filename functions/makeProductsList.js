@@ -6,6 +6,10 @@ const makeProductsList = async (prom) => {
   produtos.forEach(item => {
     /* console.log(item) */
     var produto = document.createElement('div')
+    var valor = (item.preco).replace('.', ',');
+    var weight = (item.peso).replace('.', ',');
+    
+    
     produto.innerHTML = `
     <i class="fa fa-trash fa-2x lixo" onclick="removeProduct('viaVccxFfa',${item.id})"></i>
     <p><strong>ID:</strong> ${item.id}</p>
@@ -13,8 +17,8 @@ const makeProductsList = async (prom) => {
     <p><strong>Categoria:</strong> ${item.categoria}</p>
     <p><strong>Nome:</strong> ${item.nome}</p>
     <p><strong>Descrição:</strong> ${item.descricao}</p>
-    <p><strong>Preço:</strong> R$${item.preco}</p>
-    <p><strong>Peso:</strong> ${item.peso}Kg</p>
+    <p><strong>Preço:</strong> R$${valor}</p>
+    <p><strong>Peso:</strong> ${weight}Kg</p>
     <img class='productImage' src=${item.imagem} width=150" height="70">
     `;
     document.getElementById('productList').appendChild(produto);
