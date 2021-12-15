@@ -44,12 +44,12 @@
     <script src="./functions/makeCartProductList.js"></script>
 
     <script>
-      const reducer = (previousValue, currentValue) => previousValue+(currentValue.preco*currentValue.quantidade).toFixed(2);
+      const reducer = (previousValue, currentValue) => previousValue+((parseFloat(currentValue.preco*10)*currentValue.quantidade*10)/100);
       
       if (localStorage.getItem('carrinho')) {
         qtdProd = JSON.parse(localStorage.getItem('carrinho'))
         console.log(qtdProd)
-        document.getElementById("totalPrice").innerText=qtdProd.reduce(reducer,"");
+        document.getElementById("totalPrice").innerText=qtdProd.reduce(reducer,0);
         document.getElementById("totalPrice").innerText=document.getElementById("totalPrice").innerText.replace('.', ',');
         
       } else {
